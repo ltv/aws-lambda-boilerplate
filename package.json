@@ -1,0 +1,33 @@
+{
+  "name": "aws-lambda-boilerplate",
+  "version": "1.0.0",
+  "description": "The AWS Lambda Functions Boilerplate",
+  "main": "index.js",
+  "repository": "git@github.com:ltv/aws-lambda-boilerplate.git",
+  "author": "Luc <luc@ltv.dev>",
+  "private": "true",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0"
+  },
+  "workspaces": {
+    "packages": [
+      "functions/*",
+      "functions/core/*"
+    ]
+  },
+  "scripts": {
+    "serve": "serverless offline --config serverless.offline.yaml start"
+  },
+  "devDependencies": {
+    "@ltv/serverless-esbuild": "^1.24.2",
+    "esbuild": "^0.14.21",
+    "esbuild-node-externals": "^1.4.1",
+    "lodash": "^4.17.21",
+    "semver": "^7.3.5",
+    "serverless": "^3.2.0",
+    "serverless-dotenv-plugin": "^3.12.2",
+    "serverless-offline": "^8.4.0",
+    "serverless-prune-plugin": "^2.0.1"
+  }
+}

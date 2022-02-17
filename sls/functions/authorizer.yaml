@@ -1,0 +1,9 @@
+---
+baseAuthorizer:
+  handler: functions/auth/index.baseAuthorizer
+  layers:
+    - { Ref: CoreLambdaLayer }
+  package:
+    patterns:
+      - '!functions/**/node_modules/**/*'
+      - 'functions/auth/node_modules/**/*'

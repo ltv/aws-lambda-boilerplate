@@ -1,0 +1,83 @@
+service: alb
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 1024 # optional, in MB, default is 1024
+  timeout: 15 # optional, in seconds, default is 6
+  stage: ${opt:stage, 'production'}
+  region: ${opt:region, 'ap-southeast-1'}
+  versionFunctions: true
+  tracing:
+    apiGateway: true
+    lambda: true
+  environment:
+    NODE_ENV: production
+  deploymentPrefix: ${self:service}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 'dynamodb:*'
+            - 'lambda:ListFunctions'
+            - 'lambda:ListVersionsByFunction'
+            - 'lambda:ListAliases'
+            - 'lambda:DeleteFunction'
+            - 'lambda:ListLayerVersions'
+            - 'lambda:DeleteLayerVersion'
+            - 'lambda:InvokeFunction'
+            - 'xray:PutTraceSegments'
+            - 'xray:PutTelemetryRecords'
+            - 'logs:CreateLogGroup'
+            - 'logs:CreateLogStream'
+            - 'logs:PutLogEvents'
+            - 's3:*'
+            - 'sqs:*'
+          Resource:
+            - '*'
+
+custom:
+  stage: ${self:provider.stage}
+  region: ${self:provider.region}
+  allowed-headers:
+    - Authorization
+    - Content-Type
+    - Accept-Language
+  esbuild:
+    plugins: ./plugins/esbuild.js
+    packager: yarn
+    nativeZip: true
+    bundle: true
+    minify: false
+    sourcemap: false
+    keepNames: true
+    keepOutputDirectory: true
+    target: esnext
+  prune:
+    automatic: true
+    number: 3
+
+package:
+  individually: true
+
+plugins:
+  - '@ltv/serverless-esbuild'
+  - serverless-prune-plugin
+
+layers:
+  core:
+    path: functions/core
+    description: The cplus core layer
+    compatibleRuntimes:
+      - nodejs14.x
+    package:
+      patterns:
+        - '!nodejs/node_modules/aws-sdk'
+
+functions:
+  - ${file(./sls/functions/authorizer.yaml)}
+  - ${file(./sls/routes/user.yaml)}
+

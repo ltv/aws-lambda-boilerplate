@@ -1,0 +1,15 @@
+---
+allUsers:
+  handler: functions/user/index.allUsers
+  layers:
+    - { Ref: CoreLambdaLayer }
+  events:
+    - httpApi:
+        path: /users
+        method: get
+        # authorizer: ${self:custom.authorizer}
+  package:
+    patterns:
+      - '!functions/**/node_modules/**/*'
+      - '!functions/core/nodejs/node_modules/**'
+      - '!functions/core/nodejs/node_modules/**/*'

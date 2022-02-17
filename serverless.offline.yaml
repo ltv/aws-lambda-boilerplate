@@ -1,0 +1,75 @@
+service: alb
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 1024 # optional, in MB, default is 1024
+  timeout: 15 # optional, in seconds, default is 6
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ap-southeast-1'}
+  versionFunctions: true
+  environment:
+    NODE_ENV: development
+  deploymentPrefix: ${self:service}
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - 'dynamodb:*'
+            - 'lambda:ListFunctions'
+            - 'lambda:ListVersionsByFunction'
+            - 'lambda:ListAliases'
+            - 'lambda:DeleteFunction'
+            - 'lambda:InvokeFunction'
+            - 'xray:PutTraceSegments'
+            - 'xray:PutTelemetryRecords'
+            - 'logs:CreateLogGroup'
+            - 'logs:CreateLogStream'
+            - 'logs:PutLogEvents'
+            - 's3:*'
+            - 'sqs:*'
+          Resource:
+            - '*'
+
+custom:
+  stage: ${self:provider.stage}
+  region: ${self:provider.region}
+  serverless-offline:
+    httpPort: 4000
+  allowed-headers:
+    - Authorization
+    - Content-Type
+    - Accept-Language
+  dotenv:
+    path: local.env
+  esbuild:
+    packager: yarn
+    bundle: true
+    minify: true
+    sourcemap: false
+    keepNames: true
+    target: esnext
+
+package:
+  individually: true
+
+plugins:
+  - serverless-dotenv-plugin
+  - '@ltv/serverless-esbuild'
+  # - serverless-dynamodb-local
+  - serverless-offline
+
+layers:
+  core:
+    path: functions/core
+    description: The cplus core layer
+    compatibleRuntimes:
+      - nodejs14.x
+
+functions:
+  - ${file(./sls/functions/authorizer.yaml)}
+  - ${file(./sls/routes/user.yaml)}
+

@@ -1,0 +1,8 @@
+{
+  "name": "user",
+  "version": "1.0.0",
+  "author": "Luc <luc@ltv.vn>",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "private": true,
+  "dependencies": {}
+}

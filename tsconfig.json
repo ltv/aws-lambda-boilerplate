@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
+    "paths": {
+      "/opt/core/*": [
+        "functions/core/nodejs/lib/*"
+      ]
+    }
+  },
+  "include": [
+    "functions/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    ".webpack",
+    ".serverless"
+  ]
+}
