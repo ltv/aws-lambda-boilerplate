@@ -23,4 +23,12 @@ describe('createUserSchema', () => {
     const check = v.compile(createUserSchema.params)
     expect(typeof check).toBe('function')
   })
+
+  it('return 200 with valid request body', async () => {
+    const res = await createUserSchema.handler(
+      { params: { username: 'username', password: 'password' } },
+      { res: new Response() },
+    )
+    expect(res.statusCode).toBe(200)
+  })
 })
