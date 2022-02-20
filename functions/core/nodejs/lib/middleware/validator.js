@@ -17,7 +17,12 @@ const defaultOptions = {
  * The validator use `fastest-validator` package, please refer to the documentation: https://github.com/icebob/fastest-validator
  */
 export default ({ schema, options = {} }) => {
-  const v = new Validator(merge(defaultOptions, options))
+  // const v = new Validator(merge(defaultOptions, options))
+  const mergeOption = merge(defaultOptions, options)
+  const v = new Validator({
+    useNewCustomCheckerFunction: true, // using new version
+    ...mergeOption,
+  })
   const check = v.compile(schema)
 
   return {

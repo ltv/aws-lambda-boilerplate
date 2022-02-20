@@ -4,5 +4,6 @@
   "author": "Luc <luc@ltv.vn>",
   "license": "SEE LICENSE IN LICENSE.md",
   "private": true,
+  "type": "module",
   "dependencies": {}
 }

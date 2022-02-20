@@ -58,7 +58,7 @@ package:
 
 plugins:
   - serverless-dotenv-plugin
-  - '@ltv/serverless-esbuild'
+  - serverless-esbuild
   # - serverless-dynamodb-local
   - serverless-offline
 
