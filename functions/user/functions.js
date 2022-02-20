@@ -12,7 +12,7 @@ export const getUserSchema = {
   },
 }
 
-export const createUser = {
+export const createUserSchema = {
   name: 'createUser',
   params: {
     username: { type: 'string', required: true },

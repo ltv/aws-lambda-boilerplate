@@ -1,15 +1,6 @@
-import Validator from 'fastest-validator'
 import { StatusCodes } from 'http-status-codes'
-import merge from 'lodash/merge'
 import { Response } from '../response.js'
-
-const defaultOptions = {
-  defaults: {
-    object: {
-      strict: 'remove',
-    },
-  },
-}
+import createValidator from '../validator.js'
 
 /**
  * @author: @lucduong
@@ -17,12 +8,7 @@ const defaultOptions = {
  * The validator use `fastest-validator` package, please refer to the documentation: https://github.com/icebob/fastest-validator
  */
 export default ({ schema, options = {} }) => {
-  // const v = new Validator(merge(defaultOptions, options))
-  const mergeOption = merge(defaultOptions, options)
-  const v = new Validator({
-    useNewCustomCheckerFunction: true, // using new version
-    ...mergeOption,
-  })
+  const v = createValidator(options)
   const check = v.compile(schema)
 
   return {
@@ -32,8 +18,7 @@ export default ({ schema, options = {} }) => {
         return
       }
 
-      const res = new Response().kind('BAD_REQUEST')
-      return res.status(StatusCodes.BAD_REQUEST).body({ errors: result })
+      return new Response().status(StatusCodes.BAD_REQUEST).body({ errors: result })
     },
   }
 }

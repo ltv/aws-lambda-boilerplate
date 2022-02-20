@@ -24,10 +24,7 @@ export const createHandler = (options) => {
     throw new SyntaxError('the handler must be a function')
   }
   const opts = Object.assign({}, isFunction(options) ? {} : options)
-
-  opts.kind = opts.kind || (opts.name && p(opts.name)) || 'UnknownKind'
-  // const actionName = opts.name || 'unknown';
-  const res = new Response().kind(opts.kind)
+  const res = new Response()
 
   const respSerializerMiddleware = () =>
     httpResponseSerializer({

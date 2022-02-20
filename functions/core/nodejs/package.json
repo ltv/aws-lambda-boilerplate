@@ -3,6 +3,7 @@
   "name": "@layers/core",
   "description": "",
   "private": true,
+  "type": "module",
   "workspaces": {
     "nohoist": [
       "*",
