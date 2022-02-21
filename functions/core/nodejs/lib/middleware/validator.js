@@ -1,6 +1,6 @@
 import { StatusCodes } from 'http-status-codes'
 import { Response } from '../response.js'
-import createValidator from '../validator.js'
+import { createValidator } from '../validator.js'
 
 /**
  * @author: @lucduong

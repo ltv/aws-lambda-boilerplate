@@ -1,6 +1,6 @@
 import { allUsersSchema, createUserSchema } from '../functions.js'
 import { Response } from '/opt/core/response'
-import createValidator from '/opt/core/validator'
+import { createValidator } from '/opt/core/validator'
 
 describe('allUsersSchema', () => {
   it('handler is a function', () => {

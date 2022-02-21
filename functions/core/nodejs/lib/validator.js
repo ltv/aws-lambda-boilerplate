@@ -9,10 +9,12 @@ const defaultOptions = {
   },
 }
 
-export default function createValidator(opts = {}) {
+export function createValidator(opts = {}) {
   const options = merge(defaultOptions, opts)
   return new Validator({
     useNewCustomCheckerFunction: true,
     ...options,
   })
 }
+
+export default createValidator({})
