@@ -21,9 +21,7 @@ export class Response {
    */
   body(data = {}) {
     const resObj = {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-      },
+      headers: {},
       statusCode: this._status,
       body: JSON.stringify({
         data,
