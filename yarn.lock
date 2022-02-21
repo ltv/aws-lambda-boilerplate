@@ -6756,10 +6756,10 @@ serverless-dotenv-plugin@^3.12.2:
     dotenv "^10.0.0"
     dotenv-expand "^5.1.0"
 
-serverless-esbuild@^1.24.2:
-  version "1.24.2"
-  resolved "https://registry.yarnpkg.com/serverless-esbuild/-/serverless-esbuild-1.24.2.tgz#1ab710dba569ea03e83d644b6fc895d266bd9760"
-  integrity sha512-Zsy+WLajt2WSPraXdL+1HPe+yrQ81k8WN+1TmiNkhPm6JvVq8MQoIi9IXaOvGSzT7i3ZEySkU1a4qe60bSWfLA==
+serverless-esbuild@^1.25.0:
+  version "1.25.0"
+  resolved "https://registry.yarnpkg.com/serverless-esbuild/-/serverless-esbuild-1.25.0.tgz#c19527b0a658af27cc0671f9b50538e7cda0958b"
+  integrity sha512-n/ztyc8kZIZV70PK/RHXISENhgl2e6Zxj876QIXFsJQAv97Vnwa4wBMsTb3AHcLdx1WxJcRFp+uf/gHkpn0wjg==
   dependencies:
     archiver "^5.3.0"
     bestzip "^2.2.0"

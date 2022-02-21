@@ -40,7 +40,7 @@
     "semver": "^7.3.5",
     "serverless": "^3.2.0",
     "serverless-dotenv-plugin": "^3.12.2",
-    "serverless-esbuild": "^1.24.2",
+    "serverless-esbuild": "^1.25.0",
     "serverless-offline": "^8.4.0",
     "serverless-prune-plugin": "^2.0.1",
     "standard-version": "^9.3.2"
