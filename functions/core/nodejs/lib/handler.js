@@ -24,14 +24,13 @@ export const createHandler = (options) => {
     throw new SyntaxError('the handler must be a function')
   }
   const opts = Object.assign({}, isFunction(options) ? {} : options)
-  const res = new Response()
 
   const respSerializerMiddleware = () =>
     httpResponseSerializer({
       serializers: [
         {
           regex: /^application\/json$/,
-          serializer: ({ body }) => (isString(body) ? body : res.body(body)),
+          serializer: ({ body }) => (isString(body) ? body : new Response().body(body)),
         },
         {
           regex: /^text\/plain$/,
@@ -45,7 +44,7 @@ export const createHandler = (options) => {
     .use(warmup())
     .use({
       before({ event, context }) {
-        context.res = res
+        context.res = new Response()
         if (!event.body) {
           event.body = '{}'
         }
