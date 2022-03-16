@@ -1,10 +1,11 @@
 export default () => ({
   before: (request) => {
     const { event, context } = request
-    const { authorization = '' } = event.headers
+    const authorization = event.headers['Authorization'] ?? event.headers['authorization']
     const [, token] = authorization.split(' ')
 
-    const authorizer = event?.requestContext?.authorizer?.lambda
+    const authorizer =
+      event?.requestContext?.authorizer ?? event?.requestContext?.authorizer?.lambda?.lambda
     if (!authorizer) {
       return
     }
